@@ -22,9 +22,7 @@ ValidatorFactory juga merupakan object yang berat, sebaiknya hanya buat sekali d
 - test/ConstraintViolationTest.java
 - test/NestedValidationTest.java
 - test/HibernateValidatorConstraintTest.java
-- group
-Secara default, saat validator melakukan validasi, validator akan memvalidasi semua field yang memiliki Constraint
-Dengan Group Constraint, Constraint bisa dikelompokkan
-Saat melakukan validasi, bisa memilih group mana yang akan di validasi
-Setiap Constraint bisa memiliki lebih dari satu group
-Sebelum membuat group pada Constraint, harus membuat class atau interface sebagai flaging saja
+- test/GroupTest.java
+- test/GroupSequenceTest.java
+- test/GroupConvertTest.java
+- test/PayloadTest.java

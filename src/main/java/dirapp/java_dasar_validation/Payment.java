@@ -5,8 +5,12 @@ import org.hibernate.validator.constraints.Range;
 
 import dirapp.java_dasar_validation.group.CreditCardPaymentGroup;
 import dirapp.java_dasar_validation.group.VirtualAccountPaymentGroup;
+import dirapp.java_dasar_validation.payload.EmailErrorPayload;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.groups.ConvertGroup;
+import jakarta.validation.groups.Default;
 
 public class Payment {
   // selain Annotation Constraint, terdapat juga Hibernate Validator yang juga menyediakan Constraint tambahan
@@ -28,12 +32,34 @@ public class Payment {
   private Long amount;
   
   @NotBlank(groups = {CreditCardPaymentGroup.class}, message = "credit card can not blank")
-  @LuhnCheck(groups = {CreditCardPaymentGroup.class}, message = "invalid credit card number")
+  @LuhnCheck(groups = {CreditCardPaymentGroup.class}, message = "invalid credit card number",
+      payload = {EmailErrorPayload.class})
   private String creditCard;
 
   @NotBlank(groups = {VirtualAccountPaymentGroup.class}, message = "virtual account can not blank")
   private String virtualAccount;
+
+  // jika sebuah class sudah memiliki field group, namun class tersebut di embed di class lain dengan group yang berbeda
+  // maka perlu dilakukan konversi group, agar class yg di embed bisa tetap divalidasi
+  // dengan menggunakan Annotasi @ConvertGroup, lalu tentukan dari group apa ke group apa
+
+  // Contohnya class Customer yang merupakan field dari class Payment
+  // tetap ingin divalidasi ketika group "VirtualAccountPaymentGroup" dan "CreditCardPaymentGroup" divalidasi
+  @Valid
+  @NotNull(groups = {VirtualAccountPaymentGroup.class, CreditCardPaymentGroup.class},
+      message = "customer can not null")
+  @ConvertGroup(from = VirtualAccountPaymentGroup.class, to = Default.class)
+  @ConvertGroup(from = CreditCardPaymentGroup.class, to = Default.class)
+  private Customer customer;
   
+  public Customer getCustomer() {
+    return customer;
+  }
+
+  public void setCustomer(Customer customer) {
+    this.customer = customer;
+  }
+
   public String getVirtualAccount() {
     return virtualAccount;
   }
