@@ -21,6 +21,7 @@ public class ConstructorValidationTest extends AbstractValidatorTest {
     String lastName = "";
     Address address = new Address();
 
+    // mendapatkan Constructor yang memiliki tipe data String,
     Constructor<Person> constructor = Person.class.getConstructor(String.class, String.class, Address.class);
 
     Set<ConstraintViolation<Object>> violations = executableValidator
@@ -41,6 +42,7 @@ public class ConstructorValidationTest extends AbstractValidatorTest {
 
     Person person = new Person(firstName, lastName, address);
 
+    // mendapatkan Constructor yang memiliki parameter dengan tipe data String, String, Address
     Constructor<Person> constructor = Person.class.getConstructor(String.class, String.class, Address.class);
 
     Set<ConstraintViolation<Object>> violations = executableValidator
