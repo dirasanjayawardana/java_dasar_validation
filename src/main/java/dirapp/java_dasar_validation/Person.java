@@ -30,6 +30,14 @@ public class Person {
   @Valid
   private Address address;
 
+  
+  // Bean Validation bisa digunakan untuk melakukan validasi di Contructor
+  // baik itu Contructor paramter maupun Constructor Value
+  // dengan cara menambahkan Annotation Contraint di Constructor
+  // untuk melakukan validasinya menggunakan interface ExecutableValidator dengan method forExecuteables()
+  // untuk eksekusinya dengan method validateContructorParameters(constructornya, parameternya, groupnya) dan 
+  // validateConstructorReturnValue(constructornya, returnValuenya, groupnya)
+
   @Valid
   public Person() {
   }
@@ -42,6 +50,7 @@ public class Person {
     this.lastName = lastName;
     this.address = address;
   }
+
 
   public List<String> getHobbies() {
     return hobbies;
@@ -82,7 +91,13 @@ public class Person {
         ", lastName='" + lastName + '\'' +
         '}';
   }
+  
 
+  // Bean Validation bisa digunakan untuk melakukan validasi di Method, baik itu Method paramter maupun Return Value
+  // dengan cara menambahkan Annotation Contraint di Method
+  // untuk melakukan validasinya menggunakan interface ExecutableValidator dengan method forExecuteables()
+  // untuk eksekusinya dengan method validateParameters(classnya, methodnya, parameternya, groupnya) dan // validateReturnValue(classnya, methodnya, returnValuenya, groupnya)
+  
   public void sayHello(@NotBlank(message = "name can not blank") String name) {
     System.out.println("Hello " + name + ", my name is " + firstName);
   }
