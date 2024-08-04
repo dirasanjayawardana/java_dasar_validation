@@ -31,3 +31,4 @@ ValidatorFactory juga merupakan object yang berat, sebaiknya hanya buat sekali d
 - test/MessageInterpolationTest.java
 - resource/ValidationMessage.properties
 - test/MessageInternalizationTest.java
+- test/CustomConstraintTest.java
