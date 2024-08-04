@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 import jakarta.validation.ConstraintViolation;
+import jakarta.validation.MessageInterpolator;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
@@ -19,11 +20,14 @@ public abstract class AbstractValidatorTest {
 
   protected ExecutableValidator executableValidator;
 
+  protected MessageInterpolator messageInterpolator;
+
   @BeforeEach
   void setUp() {
     validatorFactory = Validation.buildDefaultValidatorFactory();
     validator = validatorFactory.getValidator();
     executableValidator = validator.forExecutables();
+    messageInterpolator = validatorFactory.getMessageInterpolator();
   }
 
   @AfterEach

@@ -9,6 +9,7 @@ import dirapp.java_dasar_validation.payload.EmailErrorPayload;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import jakarta.validation.groups.ConvertGroup;
 import jakarta.validation.groups.Default;
 
@@ -24,11 +25,14 @@ public class Payment {
   // Sebelum membuat group pada Constraint, harus membuat class atau interface sebagai flaging saja
   
 
-  @NotBlank(groups = {CreditCardPaymentGroup.class, VirtualAccountPaymentGroup.class}, message = "orderId can not blank")
+  @NotBlank(groups = {CreditCardPaymentGroup.class, VirtualAccountPaymentGroup.class}, message = "{order.id.notblank}")
+  @Size(min = 1, max = 10, message = "{order.id.size}")
   private String orderId;
   
-  @Range(groups = {CreditCardPaymentGroup.class, VirtualAccountPaymentGroup.class}, min = 10_000L, max = 100_000L, message = "amount must between 10.000 and 100.000")
-  @NotNull(groups = {CreditCardPaymentGroup.class, VirtualAccountPaymentGroup.class}, message = "amount can not blank")
+  @Range(groups = {CreditCardPaymentGroup.class, VirtualAccountPaymentGroup.class},
+      min = 10_000L, max = 100_000_000L, message = "{order.amount.range}")
+  @NotNull(groups = {CreditCardPaymentGroup.class, VirtualAccountPaymentGroup.class},
+      message = "amount can not null")
   private Long amount;
   
   @NotBlank(groups = {CreditCardPaymentGroup.class}, message = "credit card can not blank")

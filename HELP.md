@@ -28,3 +28,6 @@ ValidatorFactory juga merupakan object yang berat, sebaiknya hanya buat sekali d
 - test/PayloadTest.java
 - test/MethodValidationTest.java
 - test/ConstructorValidationTest.java
+- test/MessageInterpolationTest.java
+- resource/ValidationMessage.properties
+- test/MessageInternalizationTest.java
