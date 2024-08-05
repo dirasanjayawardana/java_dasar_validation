@@ -34,3 +34,4 @@ ValidatorFactory juga merupakan object yang berat, sebaiknya hanya buat sekali d
 - test/CustomConstraintTest.java
 - test/ConstraintCompositionTest.java
 - test/ClassLevelValidationTest.java
+- test/CrossParameterValidationTest.java

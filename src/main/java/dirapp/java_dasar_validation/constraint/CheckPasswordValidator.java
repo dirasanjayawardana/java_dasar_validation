@@ -22,13 +22,18 @@ public class CheckPasswordValidator implements ConstraintValidator<CheckPassword
 
         boolean isValid = value.getPassword().equals(value.getRetypePassword());
 
+        // ConstraintValidatorContext --> digunakan untuk membuat custom message dan path
+        // dalam keadaan ideal parameter ini tidak dibutuhkan, karena message dan path otomatis sudah ada
         if(!isValid){
+            // disable message defaultnya
             context.disableDefaultConstraintViolation();
 
+            // buat message custom untuk password
             context.buildConstraintViolationWithTemplate(messageTemplate)
                     .addPropertyNode("password")
                     .addConstraintViolation();
 
+            // buat message custom untuk refTypePassowrd
             context.buildConstraintViolationWithTemplate(messageTemplate)
                     .addPropertyNode("retypePassword")
                     .addConstraintViolation();
