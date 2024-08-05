@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.LuhnCheck;
 import org.hibernate.validator.constraints.Range;
 
 import dirapp.java_dasar_validation.constraint.CheckCase;
+import dirapp.java_dasar_validation.constraint.CheckOrderId;
 import dirapp.java_dasar_validation.enums.CaseMode;
 import dirapp.java_dasar_validation.group.CreditCardPaymentGroup;
 import dirapp.java_dasar_validation.group.VirtualAccountPaymentGroup;
@@ -27,9 +28,8 @@ public class Payment {
   // Sebelum membuat group pada Constraint, harus membuat class atau interface sebagai flaging saja
   
 
-  @CheckCase(groups = {CreditCardPaymentGroup.class}, mode = CaseMode.UPPER, message = "{order.id.upper}")
-  @NotBlank(groups = {CreditCardPaymentGroup.class, VirtualAccountPaymentGroup.class}, message = "{order.id.notblank}")
-  @Size(min = 1, max = 10, message = "{order.id.size}")
+  @CheckOrderId(groups = {CreditCardPaymentGroup.class, VirtualAccountPaymentGroup.class},
+      message = "{order.id.invalid}")
   private String orderId;
   
   @Range(groups = {CreditCardPaymentGroup.class, VirtualAccountPaymentGroup.class},

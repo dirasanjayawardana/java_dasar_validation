@@ -40,6 +40,8 @@ public @interface CheckCase {
 // Anotasi ini digunakan untuk menentukan di mana anotasi @CheckCase dapat diterapkan. Dalam hal ini, @CheckCase dapat diterapkan pada FIELD dan ANNOTATION_TYPE.
 // FIELD berarti anotasi ini bisa diterapkan pada variabel/field.
 // ANNOTATION_TYPE berarti anotasi ini bisa digunakan untuk mendekorasi anotasi lainnya.
+// ElementType.TYPE --> annotasi bisa digunakan di class, interface, enum
+// ElementType.FIELD --> annotasi bisa digunakan di field
 
 // @Retention:
 // Anotasi ini menentukan berapa lama anotasi @CheckCase akan dipertahankan. Dalam hal ini, @CheckCase akan dipertahankan pada runtime (RUNTIME), yang berarti anotasi ini tersedia selama runtime dan dapat diakses melalui reflection.
