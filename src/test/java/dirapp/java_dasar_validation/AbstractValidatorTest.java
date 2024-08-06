@@ -2,6 +2,10 @@ package dirapp.java_dasar_validation;
 
 import java.util.Set;
 
+import dirapp.java_dasar_validation.extractor.DataIntegerValueExtractor;
+import dirapp.java_dasar_validation.extractor.DataValueExtractor;
+import dirapp.java_dasar_validation.extractor.EntryValueExtractorKey;
+import dirapp.java_dasar_validation.extractor.EntryValueExtractorValue;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -24,7 +28,15 @@ public abstract class AbstractValidatorTest {
 
   @BeforeEach
   void setUp() {
-    validatorFactory = Validation.buildDefaultValidatorFactory();
+    // validatorFactory = Validation.buildDefaultValidatorFactory();
+
+    validatorFactory = Validation.byDefaultProvider().configure()
+            .addValueExtractor(new DataValueExtractor())
+            .addValueExtractor(new EntryValueExtractorKey())
+            .addValueExtractor(new EntryValueExtractorValue())
+            .addValueExtractor(new DataIntegerValueExtractor())
+            .buildValidatorFactory();
+
     validator = validatorFactory.getValidator();
     executableValidator = validator.forExecutables();
     messageInterpolator = validatorFactory.getMessageInterpolator();
