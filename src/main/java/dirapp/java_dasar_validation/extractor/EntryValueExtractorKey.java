@@ -4,6 +4,7 @@ import dirapp.java_dasar_validation.container.Entry;
 import jakarta.validation.valueextraction.ExtractedValue;
 import jakarta.validation.valueextraction.ValueExtractor;
 
+// extractor dibuat untuk setiap generic dari container, misal Entry<K, V>, maka harus dibuat extractor untuk K dan V
 public class EntryValueExtractorKey implements ValueExtractor<Entry<@ExtractedValue ?, ?>> {
 
     @Override
