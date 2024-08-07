@@ -6,14 +6,10 @@ import dirapp.java_dasar_validation.extractor.DataIntegerValueExtractor;
 import dirapp.java_dasar_validation.extractor.DataValueExtractor;
 import dirapp.java_dasar_validation.extractor.EntryValueExtractorKey;
 import dirapp.java_dasar_validation.extractor.EntryValueExtractorValue;
+import jakarta.validation.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.MessageInterpolator;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
 import jakarta.validation.executable.ExecutableValidator;
 
 public abstract class AbstractValidatorTest {
@@ -64,6 +60,13 @@ public abstract class AbstractValidatorTest {
       System.out.println(violation.getPropertyPath());
       System.out.println(violation.getMessage());
       System.out.println("===========================================================");
+    }
+  }
+
+  void validateWithException(Object o) {
+    Set<ConstraintViolation<Object>> violations = validator.validate(o);
+    if (!violations.isEmpty()) {
+      throw new ConstraintViolationException(violations);
     }
   }
 }
